@@ -1,2 +1,384 @@
-<h1>hello</h1>
-<h2>gay</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей - инженер-конструктор корейских автомобилей</title>
+    <style>
+        /* Базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(135deg, #003876 0%, #00264d 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .age {
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        /* Основной контент */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: #003876;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #e40000;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* О себе */
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Специализация */
+        .specialization {
+            background-color: #003876;
+            color: white;
+        }
+        
+        .spec-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .spec-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        .spec-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .spec-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #e40000;
+        }
+        
+        /* Подогрев */
+        .heating-feature {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .heating-demo {
+            margin: 40px 0;
+            position: relative;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .car-seat {
+            width: 200px;
+            height: 150px;
+            background: #333;
+            border-radius: 10px 10px 5px 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .heating-element {
+            position: absolute;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #ff3c00, #ff9900);
+            bottom: 0;
+            transition: height 2s ease;
+            border-radius: 5px;
+        }
+        
+        .heating-demo:hover .heating-element {
+            height: 100%;
+        }
+        
+        .heat-level {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e40000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .heating-demo:hover .heat-level {
+            opacity: 1;
+        }
+        
+        /* Контакты */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            background: #003876;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-button:hover {
+            background: #e40000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Футер */
+        footer {
+            background: #00264d;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .about-content, .spec-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-content">
+            <h1>Алексей</h1>
+            <p class="tagline">Инженер-конструктор корейских автомобилей</p>
+            <div class="age">19 лет</div>
+        </div>
+    </header>
+    
+    <!-- О себе -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Привет! Меня зовут Алексей, и я занимаюсь проектированием современных корейских автомобилей. Несмотря на молодой возраст, я уже успел погрузиться в мир автомобилестроения и найти свою специализацию — создание систем климатического контроля, в частности — инновационных систем подогрева.</p>
+                    <p>Моя страсть к автомобилям началась еще в детстве, а сейчас я превратил её в профессию. Я постоянно изучаю новые технологии и стремлюсь внедрять самые передовые решения в автомобильной промышленности.</p>
+                    <p>Корейский автопром — это эталон качества, инноваций и надежности, и я горжусь тем, что contribую в его развитие.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Заглушка для изображения -->
+                    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="80" width="200" height="70" rx="5" fill="#333"/>
+                        <rect x="60" y="40" width="180" height="40" rx="5" fill="#555"/>
+                        <circle cx="90" cy="160" r="20" fill="#ddd"/>
+                        <circle cx="210" cy="160" r="20" fill="#ddd"/>
+                        <text x="150" y="120" text-anchor="middle" fill="white">Korean Engineering</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Специализация -->
+    <section class="section specialization">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Моя специализация</h2>
+            <div class="spec-content">
+                <div class="spec-item">
+                    <div class="spec-icon">🚗</div>
+                    <h3>Проектирование</h3>
+                    <p>Разработка дизайна и конструкций корейских автомобилей с учетом эргономики и аэродинамики</p>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-icon">🔥</div>
+                    <h3>Системы подогрева</h3>
+                    <p>Создание инновационных систем климат-контроля и подогрева сидений, руля и других элементов</p>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-icon">⚙️</div>
+                    <h3>Инновации</h3>
+                    <p>Внедрение новейших технологий в автомобилестроение для повышения комфорта и безопасности</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подогрев -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Офигенный подогрев</h2>
+            <div class="heating-feature">
+                <p>Одной из моих ключевых специализаций является разработка систем подогрева, которые делают поездки в корейских автомобилях невероятно комфортными даже в самые холодные зимы.</p>
+                <p>Наведите курсор на сиденье, чтобы ощутить мощь системы подогрева:</p>
+                
+                <div class="heating-demo">
+                    <div class="car-seat">
+                        <div class="heating-element"></div>
+                    </div>
+                    <div class="heat-level">+40°C</div>
+                </div>
+                
+                <p>Мною разработанные системы обеспечивают быстрый и равномерный прогрев, имеют несколько режимов работы и интеллектуальное управление, которое автоматически поддерживает оптимальную температуру.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Контакты -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь со мной</h2>
+            <div class="contact-content">
+                <p>Если вы заинтересованы в сотрудничестве или хотите узнать больше о моей работе, свяжитесь со мной:</p>
+                <a href="mailto:alexey.auto@example.com" class="contact-button">Написать мне</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>Алексей - инженер-конструктор корейских автомобилей</p>
+            <p>© 2023 Все права защищены</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Простая анимация для демонстрации подогрева
+        document.querySelector('.heating-demo').addEventListener('mouseenter', function() {
+            const heatLevel = document.querySelector('.heat-level');
+            let temp = 20;
+            const interval = setInterval(() => {
+                if (temp < 40) {
+                    temp++;
+                    heatLevel.textContent = `+${temp}°C`;
+                }
+            }, 50);
+            
+            this.addEventListener('mouseleave', function() {
+                clearInterval(interval);
+                heatLevel.style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>
