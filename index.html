@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Алексей - инженер-конструктор корейских автомобилей</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Базовые стили */
         * {
@@ -17,6 +18,7 @@
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -228,12 +230,114 @@
             font-weight: bold;
             margin-top: 30px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
         }
         
         .contact-button:hover {
             background: #e40000;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Форма обратной связи */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #003876;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #003876;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #003876;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #e40000;
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #e40000;
         }
         
         /* Футер */
@@ -243,6 +347,21 @@
             text-align: center;
             padding: 30px 0;
             font-size: 0.9rem;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #e40000;
         }
         
         /* Адаптивность */
@@ -261,6 +380,11 @@
             
             .about-content, .spec-content {
                 flex-direction: column;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+                margin: 0 15px;
             }
         }
     </style>
@@ -349,7 +473,45 @@
             <h2 class="section-title">Свяжитесь со мной</h2>
             <div class="contact-content">
                 <p>Если вы заинтересованы в сотрудничестве или хотите узнать больше о моей работе, свяжитесь со мной:</p>
-                <a href="mailto:alexey.auto@example.com" class="contact-button">Написать мне</a>
+                <button class="contact-button" id="contactBtn">Написать мне</button>
+                
+                <div class="contact-form">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Компания</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">Сфера интересов</label>
+                            <select id="interest" name="interest">
+                                <option value="">Выберите вариант</option>
+                                <option value="design">Проектирование автомобилей</option>
+                                <option value="heating">Системы подогрева</option>
+                                <option value="innovation">Инновационные технологии</option>
+                                <option value="cooperation">Сотрудничество</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Ваше сообщение</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -358,27 +520,9 @@
     <footer>
         <div class="container">
             <p>Алексей - инженер-конструктор корейских автомобилей</p>
-            <p>© 2023 Все права защищены</p>
-        </div>
-    </footer>
-    
-    <script>
-        // Простая анимация для демонстрации подогрева
-        document.querySelector('.heating-demo').addEventListener('mouseenter', function() {
-            const heatLevel = document.querySelector('.heat-level');
-            let temp = 20;
-            const interval = setInterval(() => {
-                if (temp < 40) {
-                    temp++;
-                    heatLevel.textContent = `+${temp}°C`;
-                }
-            }, 50);
-            
-            this.addEventListener('mouseleave', function() {
-                clearInterval(interval);
-                heatLevel.style.opacity = '0';
-            });
-        });
-    </script>
-</body>
-</html>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+           
